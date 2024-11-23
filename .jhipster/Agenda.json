@@ -1,0 +1,53 @@
+{
+  "annotations": {
+    "changelogDate": "20241122012925"
+  },
+  "dto": "no",
+  "fields": [
+    {
+      "fieldName": "fecha",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "hora",
+      "fieldType": "ZonedDateTime"
+    },
+    {
+      "fieldName": "medico",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "centro_medico",
+      "fieldType": "String"
+    }
+  ],
+  "jpaMetamodelFiltering": false,
+  "name": "Agenda",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "nombre",
+      "otherEntityName": "medico",
+      "relationshipName": "idmedico",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "rut",
+      "otherEntityName": "paciente",
+      "relationshipName": "idpaciente",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "nombre",
+      "otherEntityName": "centroSalud",
+      "relationshipName": "idcentrosalud",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

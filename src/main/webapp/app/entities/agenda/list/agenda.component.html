@@ -1,0 +1,149 @@
+<div>
+  <h2 id="page-heading" data-cy="AgendaHeading">
+    <span jhiTranslate="appagendaMedicaApp.agenda.home.title">Agenda</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="appagendaMedicaApp.agenda.home.refreshListLabel">Refrescar lista</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-agenda"
+        [routerLink]="['/agenda/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="appagendaMedicaApp.agenda.home.createLabel">Crear nuevo Agenda</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (agenda?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="appagendaMedicaApp.agenda.home.notFound">Ningún Agenda encontrado</span>
+    </div>
+  }
+
+  @if (agenda && agenda.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="fecha">
+              <div class="d-flex">
+                <span jhiTranslate="appagendaMedicaApp.agenda.fecha">Fecha</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="hora">
+              <div class="d-flex">
+                <span jhiTranslate="appagendaMedicaApp.agenda.hora">Hora</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="medico">
+              <div class="d-flex">
+                <span jhiTranslate="appagendaMedicaApp.agenda.medico">Medico</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="centro_medico">
+              <div class="d-flex">
+                <span jhiTranslate="appagendaMedicaApp.agenda.centro_medico">Centro Medico</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="idmedico.nombre">
+              <div class="d-flex">
+                <span jhiTranslate="appagendaMedicaApp.agenda.idmedico">Idmedico</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="idpaciente.rut">
+              <div class="d-flex">
+                <span jhiTranslate="appagendaMedicaApp.agenda.idpaciente">Idpaciente</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="idcentrosalud.nombre">
+              <div class="d-flex">
+                <span jhiTranslate="appagendaMedicaApp.agenda.idcentrosalud">Idcentrosalud</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (agenda of agenda; track trackId(agenda)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/agenda', agenda.id, 'view']">{{ agenda.id }}</a>
+              </td>
+              <td>{{ agenda.fecha | formatMediumDate }}</td>
+              <td>{{ agenda.hora | formatMediumDatetime }}</td>
+              <td>{{ agenda.medico }}</td>
+              <td>{{ agenda.centro_medico }}</td>
+              <td>
+                @if (agenda.idmedico) {
+                  <div>
+                    <a [routerLink]="['/medico', agenda.idmedico.id, 'view']">{{ agenda.idmedico.nombre }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (agenda.idpaciente) {
+                  <div>
+                    <a [routerLink]="['/paciente', agenda.idpaciente.id, 'view']">{{ agenda.idpaciente.rut }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (agenda.idcentrosalud) {
+                  <div>
+                    <a [routerLink]="['/centro-salud', agenda.idcentrosalud.id, 'view']">{{ agenda.idcentrosalud.nombre }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/agenda', agenda.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Vista</span>
+                  </a>
+
+                  <a [routerLink]="['/agenda', agenda.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editar</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(agenda)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Eliminar</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

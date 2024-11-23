@@ -1,0 +1,30 @@
+{
+  "appagendaMedicaApp": {
+    "agenda": {
+      "home": {
+        "title": "Agenda",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Agenda",
+        "createOrEditLabel": "Crear o editar Agenda",
+        "notFound": "Ningún Agenda encontrado"
+      },
+      "created": "Un nuevo Agenda ha sido creado con el identificador {{ param }}",
+      "updated": "Un Agenda ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Agenda ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Agenda {{ id }}?"
+      },
+      "detail": {
+        "title": "Agenda"
+      },
+      "id": "ID",
+      "fecha": "Fecha",
+      "hora": "Hora",
+      "medico": "Medico",
+      "centro_medico": "Centro Medico",
+      "idmedico": "Idmedico",
+      "idpaciente": "Idpaciente",
+      "idcentrosalud": "Idcentrosalud"
+    }
+  }
+}

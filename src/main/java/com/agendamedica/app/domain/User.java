@@ -18,6 +18,7 @@ import org.hibernate.annotations.BatchSize;
 /**
  * A user.
  */
+@SuppressWarnings("unused")
 @Entity
 @Table(name = "jhi_user")
 public class User extends AbstractAuditingEntity<Long> implements Serializable {

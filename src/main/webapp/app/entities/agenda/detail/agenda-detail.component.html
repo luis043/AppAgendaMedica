@@ -1,0 +1,70 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (agenda(); as agendaRef) {
+      <div>
+        <h2 data-cy="agendaDetailsHeading"><span jhiTranslate="appagendaMedicaApp.agenda.detail.title">Agenda</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ agendaRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="appagendaMedicaApp.agenda.fecha">Fecha</span></dt>
+          <dd>
+            <span>{{ agendaRef.fecha | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="appagendaMedicaApp.agenda.hora">Hora</span></dt>
+          <dd>
+            <span>{{ agendaRef.hora | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="appagendaMedicaApp.agenda.medico">Medico</span></dt>
+          <dd>
+            <span>{{ agendaRef.medico }}</span>
+          </dd>
+          <dt><span jhiTranslate="appagendaMedicaApp.agenda.centro_medico">Centro Medico</span></dt>
+          <dd>
+            <span>{{ agendaRef.centro_medico }}</span>
+          </dd>
+          <dt><span jhiTranslate="appagendaMedicaApp.agenda.idmedico">Idmedico</span></dt>
+          <dd>
+            @if (agenda()!.idmedico) {
+              <div>
+                <a [routerLink]="['/medico', agenda()!.idmedico?.id, 'view']">{{ agendaRef.idmedico?.nombre }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="appagendaMedicaApp.agenda.idpaciente">Idpaciente</span></dt>
+          <dd>
+            @if (agenda()!.idpaciente) {
+              <div>
+                <a [routerLink]="['/paciente', agenda()!.idpaciente?.id, 'view']">{{ agendaRef.idpaciente?.rut }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="appagendaMedicaApp.agenda.idcentrosalud">Idcentrosalud</span></dt>
+          <dd>
+            @if (agenda()!.idcentrosalud) {
+              <div>
+                <a [routerLink]="['/centro-salud', agenda()!.idcentrosalud?.id, 'view']">{{ agendaRef.idcentrosalud?.nombre }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Volver</span>
+        </button>
+
+        <button type="button" [routerLink]="['/agenda', agendaRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editar</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

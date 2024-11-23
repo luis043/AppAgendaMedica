@@ -39,6 +39,7 @@ class AuthorityResourceIT {
     @Autowired
     private AuthorityRepository authorityRepository;
 
+    @SuppressWarnings("unused")
     @Autowired
     private EntityManager em;
 

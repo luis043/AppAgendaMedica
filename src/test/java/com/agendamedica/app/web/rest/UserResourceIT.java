@@ -67,6 +67,7 @@ class UserResourceIT {
     @Autowired
     private UserMapper userMapper;
 
+    @SuppressWarnings("unused")
     @Autowired
     private EntityManager em;
 

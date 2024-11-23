@@ -23,7 +23,7 @@
   },
   "references": [
     {
-      "path": "tsconfig.spec.json"
+      "Path": "tsconfig.spec.json"
     }
   ],
   "angularCompilerOptions": {

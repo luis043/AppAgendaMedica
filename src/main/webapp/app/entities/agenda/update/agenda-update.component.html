@@ -1,0 +1,136 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-agenda-heading" data-cy="AgendaCreateUpdateHeading" jhiTranslate="appagendaMedicaApp.agenda.home.createOrEditLabel">
+        Crear o editar Agenda
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="appagendaMedicaApp.agenda.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_fecha" jhiTranslate="appagendaMedicaApp.agenda.fecha">Fecha</label>
+          <div class="input-group">
+            <input
+              id="field_fecha"
+              data-cy="fecha"
+              type="text"
+              class="form-control"
+              name="fecha"
+              ngbDatepicker
+              #fechaDp="ngbDatepicker"
+              formControlName="fecha"
+            />
+            <button type="button" class="btn btn-secondary" (click)="fechaDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_hora" jhiTranslate="appagendaMedicaApp.agenda.hora">Hora</label>
+          <div class="d-flex">
+            <input
+              id="field_hora"
+              data-cy="hora"
+              type="datetime-local"
+              class="form-control"
+              name="hora"
+              formControlName="hora"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_medico" jhiTranslate="appagendaMedicaApp.agenda.medico">Medico</label>
+          <input type="text" class="form-control" name="medico" id="field_medico" data-cy="medico" formControlName="medico" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_centro_medico" jhiTranslate="appagendaMedicaApp.agenda.centro_medico">Centro Medico</label>
+          <input
+            type="text"
+            class="form-control"
+            name="centro_medico"
+            id="field_centro_medico"
+            data-cy="centro_medico"
+            formControlName="centro_medico"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_idmedico" jhiTranslate="appagendaMedicaApp.agenda.idmedico">Idmedico</label>
+          <select
+            class="form-control"
+            id="field_idmedico"
+            data-cy="idmedico"
+            name="idmedico"
+            formControlName="idmedico"
+            [compareWith]="compareMedico"
+          >
+            <option [ngValue]="null"></option>
+            @for (medicoOption of medicosSharedCollection; track $index) {
+              <option [ngValue]="medicoOption">{{ medicoOption.nombre }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_idpaciente" jhiTranslate="appagendaMedicaApp.agenda.idpaciente">Idpaciente</label>
+          <select
+            class="form-control"
+            id="field_idpaciente"
+            data-cy="idpaciente"
+            name="idpaciente"
+            formControlName="idpaciente"
+            [compareWith]="comparePaciente"
+          >
+            <option [ngValue]="null"></option>
+            @for (pacienteOption of pacientesSharedCollection; track $index) {
+              <option [ngValue]="pacienteOption">{{ pacienteOption.rut }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_idcentrosalud" jhiTranslate="appagendaMedicaApp.agenda.idcentrosalud">Idcentrosalud</label>
+          <select
+            class="form-control"
+            id="field_idcentrosalud"
+            data-cy="idcentrosalud"
+            name="idcentrosalud"
+            formControlName="idcentrosalud"
+            [compareWith]="compareCentroSalud"
+          >
+            <option [ngValue]="null"></option>
+            @for (centroSaludOption of centroSaludsSharedCollection; track $index) {
+              <option [ngValue]="centroSaludOption">{{ centroSaludOption.nombre }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancelar</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Guardar</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
