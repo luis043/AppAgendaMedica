@@ -13,8 +13,11 @@ public class SpaWebFilter extends OncePerRequestFilter {
      * Forwards any unmapped paths (except those containing a period) to the client {@code index.html}.
      */
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
-        throws ServletException, IOException {
+    protected void doFilterInternal(
+        @SuppressWarnings("null") HttpServletRequest request,
+        @SuppressWarnings("null") HttpServletResponse response,
+        @SuppressWarnings("null") FilterChain filterChain
+    ) throws ServletException, IOException {
         // Request URI includes the contextPath if any, removed it.
         String path = request.getRequestURI().substring(request.getContextPath().length());
         if (

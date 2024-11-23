@@ -21,8 +21,12 @@ public class SqlTestContainersSpringContextCustomizerFactory implements ContextC
     private static SqlTestContainer prodTestContainer;
 
     @Override
-    public ContextCustomizer createContextCustomizer(Class<?> testClass, List<ContextConfigurationAttributes> configAttributes) {
+    public ContextCustomizer createContextCustomizer(
+        @SuppressWarnings("null") Class<?> testClass,
+        @SuppressWarnings("null") List<ContextConfigurationAttributes> configAttributes
+    ) {
         return new ContextCustomizer() {
+            @SuppressWarnings("null")
             @Override
             public void customizeContext(ConfigurableApplicationContext context, MergedContextConfiguration mergedConfig) {
                 ConfigurableListableBeanFactory beanFactory = context.getBeanFactory();

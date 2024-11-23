@@ -51,7 +51,7 @@ public class AgendaAsserts {
             .satisfies(e -> assertThat(e.getFecha()).as("check fecha").isEqualTo(actual.getFecha()))
             .satisfies(e -> assertThat(e.getHora()).as("check hora").usingComparator(zonedDataTimeSameInstant).isEqualTo(actual.getHora()))
             .satisfies(e -> assertThat(e.getMedico()).as("check medico").isEqualTo(actual.getMedico()))
-            .satisfies(e -> assertThat(e.getCentro_medico()).as("check centro_medico").isEqualTo(actual.getCentro_medico()));
+            .satisfies(e -> assertThat(e.getCentroSalud()).as("check centro_medico").isEqualTo(actual.getCentroSalud()));
     }
 
     /**
@@ -63,8 +63,8 @@ public class AgendaAsserts {
     public static void assertAgendaUpdatableRelationshipsEquals(Agenda expected, Agenda actual) {
         assertThat(expected)
             .as("Verify Agenda relationships")
-            .satisfies(e -> assertThat(e.getIdmedico()).as("check idmedico").isEqualTo(actual.getIdmedico()))
-            .satisfies(e -> assertThat(e.getIdpaciente()).as("check idpaciente").isEqualTo(actual.getIdpaciente()))
-            .satisfies(e -> assertThat(e.getIdcentrosalud()).as("check idcentrosalud").isEqualTo(actual.getIdcentrosalud()));
+            .satisfies(e -> assertThat(e.getMedico()).as("check idmedico").isEqualTo(actual.getMedico()))
+            .satisfies(e -> assertThat(e.getPaciente()).as("check idpaciente").isEqualTo(actual.getPaciente()))
+            .satisfies(e -> assertThat(e.getCentroSalud()).as("check idcentrosalud").isEqualTo(actual.getCentroSalud()));
     }
 }

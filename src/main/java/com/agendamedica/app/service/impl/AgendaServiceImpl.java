@@ -55,8 +55,8 @@ public class AgendaServiceImpl implements AgendaService {
                 if (agenda.getMedico() != null) {
                     existingAgenda.setMedico(agenda.getMedico());
                 }
-                if (agenda.getCentro_medico() != null) {
-                    existingAgenda.setCentro_medico(agenda.getCentro_medico());
+                if (agenda.getCentroSalud() != null) {
+                    existingAgenda.setCentroSalud(agenda.getCentroSalud());
                 }
 
                 return existingAgenda;

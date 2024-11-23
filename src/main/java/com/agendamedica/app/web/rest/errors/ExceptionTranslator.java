@@ -63,6 +63,7 @@ public class ExceptionTranslator extends ResponseEntityExceptionHandler {
         return handleExceptionInternal((Exception) ex, pdCause, buildHeaders(ex), HttpStatusCode.valueOf(pdCause.getStatus()), request);
     }
 
+    @SuppressWarnings("null")
     @Nullable
     @Override
     protected ResponseEntity<Object> handleExceptionInternal(

@@ -25,28 +25,34 @@ class AgendaTest {
         assertThat(agenda1).isNotEqualTo(agenda2);
     }
 
+    /**
+     *
+     */
     @Test
     void idmedicoTest() {
         Agenda agenda = getAgendaRandomSampleGenerator();
         Medico medicoBack = getMedicoRandomSampleGenerator();
 
-        agenda.setIdmedico(medicoBack);
-        assertThat(agenda.getIdmedico()).isEqualTo(medicoBack);
+        agenda.medico(medicoBack);
+        assertThat(agenda.getMedico()).isEqualTo(medicoBack);
 
-        agenda.idmedico(null);
-        assertThat(agenda.getIdmedico()).isNull();
+        agenda.medico(medicoBack);
+        assertThat(agenda.getMedico()).isNull();
     }
+
+    @Test
+    void testName() {}
 
     @Test
     void idpacienteTest() {
         Agenda agenda = getAgendaRandomSampleGenerator();
         Paciente pacienteBack = getPacienteRandomSampleGenerator();
 
-        agenda.setIdpaciente(pacienteBack);
-        assertThat(agenda.getIdpaciente()).isEqualTo(pacienteBack);
+        agenda.setPaciente(pacienteBack);
+        assertThat(agenda.getPaciente()).isEqualTo(pacienteBack);
 
-        agenda.idpaciente(null);
-        assertThat(agenda.getIdpaciente()).isNull();
+        agenda.setPaciente(null);
+        assertThat(agenda.getPaciente()).isNull();
     }
 
     @Test
@@ -54,10 +60,10 @@ class AgendaTest {
         Agenda agenda = getAgendaRandomSampleGenerator();
         CentroSalud centroSaludBack = getCentroSaludRandomSampleGenerator();
 
-        agenda.setIdcentrosalud(centroSaludBack);
-        assertThat(agenda.getIdcentrosalud()).isEqualTo(centroSaludBack);
+        agenda.centroSalud(centroSaludBack);
+        assertThat(agenda.getCentroSalud()).isEqualTo(centroSaludBack);
 
         agenda.idcentrosalud(null);
-        assertThat(agenda.getIdcentrosalud()).isNull();
+        assertThat(agenda.getCentroSalud()).isNull();
     }
 }
